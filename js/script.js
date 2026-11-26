@@ -3,7 +3,6 @@ let dataByDept = {};
 window.addEventListener("DOMContentLoaded", init, false);
 
 function init() {
-    /*Pour le const loading = document.getElementById("loading-message"); on est sur de l ia*/
     const loading = document.getElementById("loading-message");
     if (loading) loading.style.display = "block";
 
@@ -44,7 +43,6 @@ function selectDepartment(name) {
     }
 
     chartContainer.innerHTML = "";
-// j ai donner a une ia pour qu il me donne juste les donner que je doit recuperer , pas le code du tout juste quelle type de donner je devais recuperer 
     const configs = [
         { key: "S1. genre", type: "donut" },
         { key: "s17. Type habitat", type: "pie" },
@@ -55,7 +53,6 @@ function selectDepartment(name) {
     configs.forEach(conf => {
         const counts = {};
         data.forEach(d => {
-            //pour eviter des ligne en plus betement j ai utiliser ? appeler operateur ternaire pour verifier si la cle exite bien avant de faire le trim
             const val = d[conf.key] ? d[conf.key].trim() : "N/A";
             counts[val] = (counts[val] || 0) + 1;
         });
@@ -114,8 +111,6 @@ function renderPie(svgElement, dataObj) {
     addLegend(svg, dataArray, color);
 }
 
-/*cette fonction est generer par ia pour generer d autre type de graphique car je ne savais pas lequelle 
-faire donc je lui ai dis en js fait moi une fonction pour faire un donut chart avec d3.js*/ 
 function renderDonut(svgElement, dataObj) {
     const dataArray = Object.entries(dataObj).map(([label, value]) => ({ label, value }));
     const width = 350, height = 300, radius = 85;
@@ -155,9 +150,6 @@ function renderDonut(svgElement, dataObj) {
     addLegend(svg, dataArray, color);
 }
 
-/*cette fonction est ecrite a la mains mais j ai eu besoin d ia pour le raisonement rien na ete ecris pas de l ia 
-par contre j ai du lui demander comment faire un bar chart avec d3.js et on ma dis etape par etape ce que je doit faire et j ai preciser de le faire sans donner de code bien sur 
-*/
 function renderBar(svgElement, dataObj) {
     const dataArray = Object.entries(dataObj).map(([label, value]) => ({ label, value }));
     const margin = { top: 20, right: 20, bottom: 60, left: 40 };
@@ -221,7 +213,6 @@ function addLegend(svg, data, colorScale) {
             .style("fill", "#ccc");
     });
 }
-//recuperer d un ancien projets ou j avais fait de l autocomplete sur une barre de recherche 
 function setupSearch() {
     const input = document.getElementById("search");
     const suggestions = document.getElementById("autocomplete");
@@ -252,7 +243,6 @@ function setupSearch() {
     });
 }
 
-//pour la selection des departement sur la map j ai rajouter une ligne pour la corse car elle est diviser en 2 dans le svg mais je  veut la considerer comme un seul departement
 function setupInteractivity() {
     document.querySelectorAll(".map__image path").forEach(path => {
         path.addEventListener("click", function () {
